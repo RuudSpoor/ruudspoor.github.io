@@ -14,6 +14,42 @@
         padding: 0;
       }
 
+	/* Style the tab */
+	.tab {
+	  overflow: hidden;
+	  border: 1px solid #ccc;
+	  background-color: #f1f1f1;
+	}
+
+	/* Style the buttons that are used to open the tab content */
+	.tab button {
+	  background-color: inherit;
+	  float: left;
+	  border: none;
+	  outline: none;
+	  cursor: pointer;
+	  padding: 14px 16px;
+	  transition: 0.3s;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab button:hover {
+	  background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	.tab button.active {
+	  background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+	  display: none;
+	  padding: 6px 12px;
+	  border: 1px solid #ccc;
+	  border-top: none;
+	}	  
+	  
       #renderCanvas {
         width: 100%;
         height: 100%;
@@ -27,39 +63,72 @@
   </head>
 
   <body>
-    <canvas id="renderCanvas" touch-action="none"></canvas>
-    <!-- touch-action="none" for best results from PEP -->
+		 <div class="tab">
+		  <button class="tablinks" onclick="showTab(event, 'viewer')">Viewer</button>
+		  <button class="tablinks" onclick="showTab(event, 'connections')">Connections</button>
+		</div> 
+  
+		<script>
+			function showTab(evt, tabName) {
+			  // Declare all variables
+			  var i, tabcontent, tablinks;
 
-    <script>
-      const canvas = document.getElementById("renderCanvas"); // Get the canvas element
-      const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+			  // Get all elements with class="tabcontent" and hide them
+			  tabcontent = document.getElementsByClassName("tabcontent");
+			  for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			  }
 
-      // Add your code here matching the playground format
-	  const createScene = function () {
-        const scene = new BABYLON.Scene(engine);
+			  // Get all elements with class="tablinks" and remove the class "active"
+			  tablinks = document.getElementsByClassName("tablinks");
+			  for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			  }
 
-        const box = BABYLON.MeshBuilder.CreateBox("box", {});
-		box.position.y = 0.5
-		const ground = BABYLON.MeshBuilder.CreateGround("ground", {width:10, height:10});
+			  // Show the current tab, and add an "active" class to the button that opened the tab
+			  document.getElementById(tabName).style.display = "block";
+			  evt.currentTarget.className += " active";
+			}			
+		</script>
+  
+		<div id="connections", class="tabcontent">	
+			<h3>Connections</h3>
+		</div>
+		<div id="viewer", class="tabcontent">
+			<canvas id="renderCanvas" touch-action="none"></canvas>
+			<!-- touch-action="none" for best results from PEP -->
 
-        const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
-        camera.attachControl(canvas, true);
-        const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
+			<script>
+			  const canvas = document.getElementById("renderCanvas"); // Get the canvas element
+			  const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-        return scene;
-      };
+			  // Add your code here matching the playground format
+			  const createScene = function () {
+				const scene = new BABYLON.Scene(engine);
 
-      const scene = createScene(); //Call the createScene function
+				const box = BABYLON.MeshBuilder.CreateBox("box", {});
+				box.position.y = 0.5
+				const ground = BABYLON.MeshBuilder.CreateGround("ground", {width:10, height:10});
 
-      // Register a render loop to repeatedly render the scene
-      engine.runRenderLoop(function () {
-        scene.render();
-      });
+				const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
+				camera.attachControl(canvas, true);
+				const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
 
-      // Watch for browser/canvas resize events
-      window.addEventListener("resize", function () {
-        engine.resize();
-      });
-    </script>
+				return scene;
+			  };
+
+			  const scene = createScene(); //Call the createScene function
+
+			  // Register a render loop to repeatedly render the scene
+			  engine.runRenderLoop(function () {
+				scene.render();
+			  });
+
+			  // Watch for browser/canvas resize events
+			  window.addEventListener("resize", function () {
+				engine.resize();
+			  });
+			</script>
+		</div>
   </body>
 </html>
