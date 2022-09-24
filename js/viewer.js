@@ -12,19 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
 	const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
 	const createScene = function () {
-	const scene = new BABYLON.Scene(engine);
+		const scene = new BABYLON.Scene(engine);
 
-	//const box = BABYLON.MeshBuilder.CreateBox("box", {});
-	//box.position.y = 0.5
-	
-	const ground = BABYLON.MeshBuilder.CreateGround("ground", {width:10, height:10});
+		//const box = BABYLON.MeshBuilder.CreateBox("box", {});
+		//box.position.y = 0.5
+		
+		// The first parameter can be set to null to load all meshes and skeletons
+		BABYLON.SceneLoader.ImportMesh(["model"], "./res/", "cube_10x10x10mm.stl", scene, function (meshes, particleSystems, skeletons) {
+			const model = meshes[0];
+			model.position.y = 5;
+		});
+		
+		const ground = BABYLON.MeshBuilder.CreateGround("ground", {width:20, height:20});
 
-	const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
-	camera.attachControl(canvas, true);
-	
-	const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
+		const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
+		camera.attachControl(canvas, true);
+		
+		const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
 
-	return scene;
+		return scene;
 	};
 
 	const scene = createScene(); //Call the createScene function
