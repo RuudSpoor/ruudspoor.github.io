@@ -2,146 +2,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Babylon Template</title>
 
-    <style>
-      html,
-      body {
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-		border: 0px;
-        padding: 0px;
-		position: relative;
-      }
-
-	/* Style the tab */
-	.tab {
-	  height: 50px;
-	  overflow: hidden;
-	  border: 1px solid #ccc;
-	  background-color: #f1f1f1;
-	}
-
-	/* Style the buttons that are used to open the tab content */
-	.tab button {
-	  background-color: inherit;
-	  float: left;
-	  border: none;
-	  outline: none;
-	  cursor: pointer;
-	  padding: 14px 16px;
-	  transition: 0.3s;
-	}
-
-	/* Change background color of buttons on hover */
-	.tab button:hover {
-	  background-color: #ddd;
-	}
-
-	/* Create an active/current tablink class */
-	.tab button.active {
-	  background-color: #ccc;
-	}
-
-	/* Style the tab content */
-	.tabcontent {
-	  width: 100%;
-	  height: calc(100% - 50px);
-	  display: none;
-	  padding: 0px;
-	  border: 1px solid #ccc;
-	  border-top: none;
-	  margin: 0px;
-	  position: relative;
-	}
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />	    
 	
-	#renderCanvas {
-        margin: 0px;
-		border: 0px;
-        padding: 0px;
-	}
-    </style>
-
+	<title>Babylon Template</title>
+	
+	
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+
+	<script src="js/tabs.js"></script>
+	<script src="js/viewer.js"></script>
+	<script src="js/editor.js"></script>
+	<!--
+	<script src="js/data.js"></script>
+	<script src="js/connections.js"></script>
+	-->
   </head>
 
   <body>
-		 <div class="tab">
-		  <button class="tablinks" onclick="showTab(event, 'viewer')">Viewer</button>
-		  <button class="tablinks" onclick="showTab(event, 'connections')">Connections</button>
-		</div> 
   
-		<div id="connections", class="tabcontent">	
-			<h3>Connections</h3>
-		</div>
+		 <div class="tab">
+			  <button class="tablinks" onclick="showTab(event, 'viewer_content')">Viewer</button>
+			  <button class="tablinks" onclick="showTab(event, 'editor_content')">Editor</button>
+			  <button class="tablinks" onclick="showTab(event, 'data_content')">Data</button>
+			  <button class="tablinks" onclick="showTab(event, 'connections_content')">Connections</button>
+		</div> 
 		
-		<div id="viewer", class="tabcontent">
-			<canvas id="renderCanvas" touch-action="none"></canvas>
+		<div id="viewer_content", class="tabcontent">
+			<canvas id="render_canvas" touch-action="none"></canvas>
 			<!-- touch-action="none" for best results from PEP -->
 		</div>
+		
+		<div id="editor_content", class="tabcontent">
+			<label>Add .Obj model to Scene</label><br>
+			<input type="file", id="file_obj_selection" name="file_obj_selection" accept="obj">
+		</div>		
+		
   </body>
-  
-	<script>
-	  const canvas = document.getElementById("renderCanvas"); // Get the canvas element
-	  const parent = document.getElementById("viewer")
-	  canvas.style.width = '100%';
-	  canvas.style.height = '100%';
-	  canvas.width = viewer.offsetWidth;
-	  canvas.height = viewer.offsetHeight;
-	  const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-
-	  // Add your code here matching the playground format
-	  const createScene = function () {
-		const scene = new BABYLON.Scene(engine);
-
-		const box = BABYLON.MeshBuilder.CreateBox("box", {});
-		box.position.y = 0.5
-		const ground = BABYLON.MeshBuilder.CreateGround("ground", {width:10, height:10});
-
-		const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 15, new BABYLON.Vector3(0, 0, 0));
-		camera.attachControl(canvas, true);
-		const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
-
-		return scene;
-	  };
-
-	  const scene = createScene(); //Call the createScene function
-
-	  // Register a render loop to repeatedly render the scene
-	  engine.runRenderLoop(function () {
-		scene.render();
-	  });
-
-	  // Watch for browser/canvas resize events
-	  window.addEventListener("resize", function () {
-		engine.resize();
-	  });
-	  
-	function showTab(evt, tabName) {
-	  // Declare all variables
-	  var i, tabcontent, tablinks;
-
-	  // Get all elements with class="tabcontent" and hide them
-	  tabcontent = document.getElementsByClassName("tabcontent");
-	  for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	  }
-
-	  // Get all elements with class="tablinks" and remove the class "active"
-	  tablinks = document.getElementsByClassName("tablinks");
-	  for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	  }
-
-	  // Show the current tab, and add an "active" class to the button that opened the tab
-	  document.getElementById(tabName).style.display = "block";
-	  evt.currentTarget.className += " active";
-	  
-	  window.dispatchEvent(new Event('resize'));
-	}			
-	</script>  
+ 
 </html>
