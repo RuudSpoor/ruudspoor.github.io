@@ -1,0 +1,7 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINtUdw4aFiFInei+WS6J7eXaDzlQcFe5auxohAukbV7X ruud.spoor@gmail.com
+Generating public/private ALGORITHM key pair.
+/home/Documents/WebsiteWorkspace
+ssh-keygen -t ed25519 -C ruud.spoor@gmail.com
+Generating public/private ALGORITHM key pair.
+/home/ruud/Documents/WebsiteWorkspace/.ssh/id_ALGORITHM
+ssh-keygen -t ed25519 -C ruud.spoor@gmail.com
