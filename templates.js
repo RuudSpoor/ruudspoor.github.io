@@ -25,12 +25,10 @@ class JCI_Header extends HTMLElement {
           </ul>
           <ul class="nav navbar-nav ms-auto">
               <li class="nav-item">
-                  <div class="btn-nav"><a class="btn btn-warning btn-small navbar-btn" href="lidworden.html">Lid Worden!</a>
-                  </div>
+                  <div class="btn-nav"><a class="btn btn-warning btn-small navbar-btn" href="lidworden.html">Lid Worden!</a></div>
               </li>
               <li class="nav-item">
-                  <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" href="contact.html">Contact</a>
-                  </div>
+                  <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" href="contact.html">Contact</a></div>
               </li>
           </ul>
         </div>
@@ -69,9 +67,9 @@ class JCI_Footer extends HTMLElement {
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="https://getbootstrap.com/docs/5.2/examples/footers/#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="https://getbootstrap.com/docs/5.2/examples/footers/#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="https://getbootstrap.com/docs/5.2/examples/footers/#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.facebook.com/jcialmelo/?locale=nl_NL"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://twitter.com/jcialmelo"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/jcialmelo/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
         </ul>
       </footer>
     </div>
